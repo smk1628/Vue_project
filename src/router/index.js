@@ -10,6 +10,10 @@ export default new VueRouter({
     mode:'history',
     routes:[
         {
+            path:'/',
+            redirect:'/msite'
+        },
+        {
             path:'/msite',
             component: Msite
         },
