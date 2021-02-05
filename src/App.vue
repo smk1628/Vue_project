@@ -18,10 +18,6 @@ import FooterGuide from '@components/FooterGuide/FooterGuide.vue'
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
- .aa
-    width 100px
-    height 100px
-    background: #000;
   .wrap{
     box-sizing border-box
     padding 0 18px;

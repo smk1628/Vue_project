@@ -1,38 +1,44 @@
 <template>
   <div>
+    <!-- 头部 -->
     <div class="mstie-header">
       <Header  title="首页">
       </Header>
+      <!-- 搜索框 -->
       <div class="msite-search">
         <span :class="isSearch? 'icon_active':'icon_leave'" class="iconfont icon-sousuo"></span>
-        <input @focus="onFocus" @blur="onBlur" type="input">
+        <input @focus="isSearch = true" @blur="isSearch = false" type="input">
       </div>
     </div>
     <div class="msite-body">
-      <div class="msite-show">
-        <div ref="scl1" class="swiper-container">
-          <div class="swiper-wrapper">
-              <div class="swiper-slide">Slide 1</div>
-              <div class="swiper-slide">Slide 2</div>
-              <div class="swiper-slide">Slide 3</div>
+      <Scroll>
+        <!-- 轮播图 -->
+        <div class="msite-show">
+          <div ref="scl1" class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">Slide 1</div>
+                <div class="swiper-slide">Slide 2</div>
+                <div class="swiper-slide">Slide 3</div>
+            </div>
+            <!-- 如果需要分页器 -->
+            <div class="swiper-pagination"></div>
           </div>
-          <!-- 如果需要分页器 -->
-          <div class="swiper-pagination"></div>
         </div>
-      </div>
-      <div class="miste-recommend">
-        <span class="recommend-title">精选好物</span>
-        <div class="recommend-goods">
-          <span class="goods-item"></span>
-          <span class="goods-item"></span>
-          <span class="goods-item"></span>
-          <span class="goods-item"></span>
-          <span class="goods-item"></span>
-          <span class="goods-item"></span>
-          <span class="goods-item"></span>
-          <span class="goods-item"></span>
+        <!-- 商品列表 -->
+        <div class="miste-recommend">
+          <span class="recommend-title">精选好物</span>
+          <div class="recommend-goods">
+            <span class="goods-item"></span>
+            <span class="goods-item"></span>
+            <span class="goods-item"></span>
+            <span class="goods-item"></span>
+            <span class="goods-item"></span>
+            <span class="goods-item"></span>
+            <span class="goods-item"></span>
+            <span class="goods-item"></span>
+          </div>
         </div>
-      </div>
+      </Scroll>
     </div>
   </div>
 </template>
@@ -40,6 +46,7 @@
 <script type="text/ecmascript-6">
   import Swiper from 'swiper'
   import 'swiper/css/swiper.min.css'
+  import Scroll from '../../components/scroll/scroll.vue'
   export default {
     name:'msite',
     data(){
@@ -48,12 +55,12 @@
       }
     },
     methods:{
-      onFocus(){
-        this.isSearch = true
-      },
-      onBlur(){
-        this.isSearch = false
-      }
+      // onFocus(){
+      //   this.isSearch = true
+      // },
+      // onBlur(){
+      //   this.isSearch = false
+      // }
     },
     mounted(){
       new Swiper(this.$refs.scl1,{
@@ -64,6 +71,9 @@
           bulletActiveClass: 'my-bullet-active',
         }
       })
+    },
+    components:{
+      Scroll
     }
   }
 </script>
@@ -110,11 +120,13 @@
   }
 }
 .msite-body{
+  position: relative;
   margin-bottom 50px
   margin-top 138px
   .msite-show{
     box-sizing border-box
     padding 18px 0
+    background #fff
   }
   .swiper-container{
     box-sizing border-box
@@ -132,6 +144,7 @@
     }
   }
   .miste-recommend{
+    background #fff
     .recommend-title{
       font-size 20px
       font-weight bold
