@@ -1,6 +1,6 @@
 <template>
   <div>
-      order
+      <Header title="清单"></Header>
   </div>
 </template>
 

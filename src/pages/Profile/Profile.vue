@@ -1,6 +1,6 @@
 <template>
   <div>
-      profile
+      <Header title="我"></Header>
   </div>
 </template>
 

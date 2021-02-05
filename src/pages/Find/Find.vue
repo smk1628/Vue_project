@@ -1,6 +1,6 @@
 <template>
   <div>
-      search
+      <Header title="发现"></Header>
   </div>
 </template>
 

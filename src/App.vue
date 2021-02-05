@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-view></router-view>
+    <router-view class="wrap"></router-view>
     <FooterGuide></FooterGuide>
   </div>
 </template>
@@ -22,6 +22,10 @@ import FooterGuide from '@components/FooterGuide/FooterGuide.vue'
     width 100px
     height 100px
     background: #000;
+  .wrap{
+    box-sizing border-box
+    padding 0 18px;
+  }
 </style>
 
 
