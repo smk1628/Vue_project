@@ -27,11 +27,13 @@
         top:0,
         startY:0,
         startX:0,
+        scrollTop:0,
         transition:false,
         isVertical:false,
         isFirst:true,
         isLoading:false,
-        isUpdating:false
+        isUpdating:false,
+        isToPreventDefault:false
       }
     },
     methods:{
@@ -39,24 +41,29 @@
         this.transition = false
         this.startY = e.targetTouches[0].pageY
         this.startX = e.targetTouches[0].pageX
+        this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop
       },
       touchMove(e){
-          let moveY = e.targetTouches[0].pageY - this.startY
-          let moveX = e.targetTouches[0].pageX - this.startX
+        let st = document.documentElement.scrollTop || document.body.scrollTop
+        let ch = document.documentElement.clientHeight || document.body.clientHeight;
+        let sh = document.documentElement.scrollHeight || document.body.scrollHeight;
+        let moveY = e.targetTouches[0].pageY - this.startY
+        let moveX = e.targetTouches[0].pageX - this.startX
+        if(!this.isToPreventDefault && !this.isFirst) return
+        else if(sh > ch && st+ch == sh) this.top  = moveY<-100? parseInt(-100*0.4):parseInt(moveY*0.4)
+        else{
+          if((moveY - st) > 0 ) this.isToPreventDefault=true
+          if(this.isToPreventDefault && this.scrollTop == 0) e.preventDefault()
           if(Math.abs(moveY) > Math.abs(moveX) && this.isFirst) this.isVertical = true
           this.isFirst = false
-          if(this.isVertical){
-            if(moveY >0){
-              this.top  = moveY>200? parseInt(200*0.4):parseInt(moveY*0.4)
-            }else{
-              this.top  = moveY<-100? parseInt(-100*0.4):parseInt(moveY*0.4)
-            }
-          }
+          if(this.isVertical && this.scrollTop == 0) if(moveY >0) this.top  = moveY>200? parseInt(200*0.4):parseInt(moveY*0.4)
+        }
       },
       touchEnd(e){
         this.transition=true
         this.isVertical=false
         this.isFirst = true
+        this.isToPreventDefault = false
         if(this.top>70){
           this.isLoading = true
          setTimeout(()=>{
@@ -83,8 +90,10 @@
 }
 
 .pull-refresh{
-  position fixed
-  height 80px
+  position absolute
+  left: 0;
+  top:5px;
+  height 20px
   width 339px
   display flex
   justify-content center
@@ -98,6 +107,8 @@
 }
 .yo-scroll{
   position: relative;
+  top: 0;
+  left: 0;
   .inner{
     position relative;
   }                                   

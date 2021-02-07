@@ -31,6 +31,7 @@ export default {
   name: "FooterGuide",
   methods: {
     goto(path) {
+      if(this.$route.path === path) return //避免重复路由
       this.$router.replace(path);
     },
   },

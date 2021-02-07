@@ -121,8 +121,8 @@
 }
 .msite-body{
   position: relative;
-  margin-bottom 50px
-  margin-top 138px
+  padding-bottom 30px
+  padding-top 150px
   .msite-show{
     box-sizing border-box
     padding 18px 0

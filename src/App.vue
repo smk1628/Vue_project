@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w">
     <router-view class="wrap"></router-view>
     <FooterGuide></FooterGuide>
   </div>
@@ -18,6 +18,10 @@ import FooterGuide from '@components/FooterGuide/FooterGuide.vue'
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
+.w{
+  width 100vw
+  height 100vh
+}
   .wrap{
     box-sizing border-box
     padding 0 18px;
